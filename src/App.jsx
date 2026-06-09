@@ -1,9 +1,7 @@
+import AppRoutes from "./routes/app-routes";
+
 function App() {
-  return (
-    <div>
-      <h1>NDrive</h1>
-    </div>
-  );
+  return <AppRoutes />;
 }
 
 export default App;
