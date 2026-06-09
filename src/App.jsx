@@ -1,7 +1,7 @@
 function App() {
   return (
-    <div>
-      <h1>NDrive</h1>
+    <div className="min-h-screen flex items-center justify-center">
+      <h1 className="text-5xl font-bold bg-red-200">NDrive</h1>
     </div>
   );
 }
