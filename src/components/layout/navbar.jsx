@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Logo from "./logo";
 import Container from "./container";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
+  const navigate = useNavigate();
   return (
     <div className="border-b">
       <Container>
@@ -12,7 +14,13 @@ function Navbar() {
 
           <Input placeholder="Search" className="flex-1 max-w-lg" />
 
-          <Button variant="outline">Browse cars</Button>
+          <Button
+            variant="outline"
+            className="cursor-pointer"
+            onClick={() => navigate("/cars")}
+          >
+            Browse cars
+          </Button>
         </div>
       </Container>
     </div>
