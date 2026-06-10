@@ -1,4 +1,7 @@
+import PageLayout from "../../components/layout/page-layout";
+
 function CarsPage() {
-  return <div>Cars Page</div>;
+  return <PageLayout>Cars Page</PageLayout>;
 }
+
 export default CarsPage;
