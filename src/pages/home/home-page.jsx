@@ -1,6 +1,6 @@
-import PageLayout from "../../components/layout/page-layout";
-import Container from "../../components/layout/container";
-import HeroSection from "./components/hero-section";
+import PageLayout from "@/components/layout/page-layout";
+import Container from "@/components/layout/container";
+import HeroSection from "@/pages/home/components/hero-section";
 import CarsGrid from "@/components/car/cars-grid";
 import { useCars } from "@/hooks/use-cars";
 import ErrorState from "@/components/shared/error-state";
@@ -10,11 +10,23 @@ function HomePage() {
   const { carsList, loading, error } = useCars();
 
   if (error) {
-    return <ErrorState message={error} />;
+    return (
+      <PageLayout>
+        <Container>
+          <ErrorState message={error} />
+        </Container>
+      </PageLayout>
+    );
   }
 
   if (!loading && carsList.length === 0) {
-    return <EmptyState message="No cars available." />;
+    return (
+      <PageLayout>
+        <Container>
+          <EmptyState message="No cars available." />
+        </Container>
+      </PageLayout>
+    );
   }
 
   return (

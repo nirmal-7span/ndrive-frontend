@@ -1,4 +1,4 @@
-import PageLayout from "../../components/layout/page-layout";
+import PageLayout from "@/components/layout/page-layout";
 
 function CarDetailsPage() {
   return <PageLayout>Car Details Page</PageLayout>;

@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import Logo from "./logo";
 import Container from "./container";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const navigate = useNavigate();
@@ -11,8 +10,6 @@ function Navbar() {
       <Container>
         <div className="flex items-center justify-between gap-4 py-3">
           <Logo />
-
-          <Input placeholder="Search" className="flex-1 max-w-lg" />
 
           <div className="flex gap-2">
             <Button
