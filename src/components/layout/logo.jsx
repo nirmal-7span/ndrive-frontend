@@ -1,4 +1,4 @@
-import logo from "../../assets/logos/NDrive Logo.png";
+import logo from "@/assets/logos/NDrive Logo.png";
 
 function Logo() {
   return (
