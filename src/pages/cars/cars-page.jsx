@@ -7,11 +7,22 @@ import ErrorState from "@/components/shared/error-state";
 import EmptyState from "@/components/shared/empty-state";
 import SearchBar from "./components/search-bar";
 import SortDropdown from "./components/sort-dropdown";
+import FiltersSidebar from "./components/filters-sidebar";
 
 function CarsPage() {
   const { carsList, loading, error, uniqueBrandsCount } = useCars();
 
   const [searchQuery, setSearchQuery] = useState("");
+
+  const [filters, setFilters] = useState({
+    brands: [],
+    fuelTypes: [],
+    transmissions: [],
+    ownerships: [],
+    priceRange: { min: "", max: "" },
+    yearRange: { min: "", max: "" },
+    kmRange: { min: "", max: "" },
+  });
 
   const [sortBy, setSortBy] = useState("Relevance");
 
@@ -25,6 +36,53 @@ function CarsPage() {
           car.brand.toLowerCase().includes(query) ||
           car.model.toLowerCase().includes(query) ||
           car.variant.toLowerCase().includes(query),
+      );
+    }
+
+    if (filters.brands.length > 0) {
+      result = result.filter((car) => filters.brands.includes(car.brand));
+    }
+    if (filters.fuelTypes.length > 0) {
+      result = result.filter((car) => filters.fuelTypes.includes(car.fuelType));
+    }
+    if (filters.transmissions.length > 0) {
+      result = result.filter((car) =>
+        filters.transmissions.includes(car.transmission),
+      );
+    }
+    if (filters.ownerships.length > 0) {
+      result = result.filter((car) =>
+        filters.ownerships.includes(car.ownership),
+      );
+    }
+    if (filters.priceRange.min) {
+      result = result.filter(
+        (car) => car.price >= Number(filters.priceRange.min),
+      );
+    }
+    if (filters.priceRange.max) {
+      result = result.filter(
+        (car) => car.price <= Number(filters.priceRange.max),
+      );
+    }
+    if (filters.yearRange.min) {
+      result = result.filter(
+        (car) => car.year >= Number(filters.yearRange.min),
+      );
+    }
+    if (filters.yearRange.max) {
+      result = result.filter(
+        (car) => car.year <= Number(filters.yearRange.max),
+      );
+    }
+    if (filters.kmRange.min) {
+      result = result.filter(
+        (car) => car.kmDriven >= Number(filters.kmRange.min),
+      );
+    }
+    if (filters.kmRange.max) {
+      result = result.filter(
+        (car) => car.kmDriven <= Number(filters.kmRange.max),
       );
     }
 
@@ -47,7 +105,7 @@ function CarsPage() {
     });
 
     return result;
-  }, [carsList, searchQuery, sortBy]);
+  }, [carsList, searchQuery, sortBy, filters]);
 
   if (error) {
     return (
@@ -90,10 +148,12 @@ function CarsPage() {
 
         <div className="flex flex-col lg:flex-row gap-8">
           <div className="w-full lg:w-64 shrink-0">
-            <div className="bg-muted/10 p-4 rounded-lg border h-full">
-              <p className="text-muted-foreground text-sm font-medium">
-                Filters Placeholder
-              </p>
+            <div className="bg-muted/10 p-4 rounded-lg border sticky top-24 max-h-[calc(100vh-8rem)] overflow-y-auto scrollbar-thin">
+              <FiltersSidebar
+                cars={carsList}
+                filters={filters}
+                setFilters={setFilters}
+              />
             </div>
           </div>
 
