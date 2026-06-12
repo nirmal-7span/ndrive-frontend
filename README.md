@@ -1,17 +1,69 @@
-# React + Vite
+# NDrive - Used Cars
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hi there! 👋 Welcome to the frontend repository for **NDrive**, a modern, responsive and user-friendly web application for browsing and buying used cars.
 
-Currently, two official plugins are available:
+I built this project during my internship to showcase a clean UI, solid React architecture, and a great user experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## ✨ What's Inside
 
-## React Compiler
+- **Dynamic Car Discovery**: A beautiful home page featuring top picks and an automatically updated "Recently Viewed" section.
+- **Advanced Search & Filters**: Users can quickly find the exact car they want. Filters like Brand, Fuel Type, and Transmission sync directly with the URL so users can easily copy and share exact search results with friends!
+- **Smooth Pagination**: Built-in client-side pagination that makes browsing large inventories seamless.
+- **Detailed Car Views**: A dedicated page for every car, featuring an interactive image gallery, full specifications, and a one-click "Share" button.
+- **Smart Local Storage**: The "Recently Viewed" feature runs purely on the frontend. It cleverly stores only lightweight car IDs in `localStorage` to keep the app fast.
+- **SEO Ready**: Configured with `react-helmet-async` for dynamic browser tab titles, and static Open Graph (`og:`) tags so the site looks amazing when links are shared on WhatsApp or Twitter.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠️ Tech Stack
 
-## Expanding the ESLint configuration
+This project was built using modern web development tools:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# ndrive-frontend
+- **React** - The core UI library.
+- **Vite** - For local development and optimized production builds.
+- **Tailwind CSS** - For rapid, custom, and highly responsive styling.
+- **Shadcn UI** - For beautiful, accessible, and highly customizable UI components.
+- **React Router DOM** - For seamless single-page application navigation.
+
+## 🚀 Getting Started
+
+If you want to run this project locally on your machine, it's super easy!
+
+### Prerequisites
+
+Make sure you have [Node.js](https://nodejs.org/) installed.
+
+### Installation
+
+1. **Clone the repository** (or download the zip):
+
+   ```bash
+   git clone <repo-url>
+   cd ndrive-frontend
+   ```
+
+2. **Install the dependencies**:
+
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server**:
+   ```bash
+   npm run dev
+   ```
+4. **Open it in your browser**:
+   Vite will give you a local URL (usually `http://localhost:5173`). Open that in your browser to see the app running!
+
+## 📂 Project Structure
+
+Here is a quick overview of how the code is organized:
+
+- `/src/components` - Reusable UI elements (Navbar, Footer, Car Cards, Layout containers).
+- `/src/pages` - The main views of the application (Home, Cars List, Car Details).
+- `/src/data` - Contains `cars.json`, our mock database that powers the application.
+- `/src/api` - The simulated API logic that fetches our car data.
+- `/public` - Static assets like the main `og-image.png`.
+- `index.html` - The main HTML entry point containing our global SEO/Open Graph tags.
+
+---
+
+_Built during my frontend internship._
