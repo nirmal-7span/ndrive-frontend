@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import Container from "@/components/layout/container";
 import PageLayout from "@/components/layout/page-layout";
 import { Button } from "@/components/ui/button";
@@ -36,7 +37,10 @@ export default function CarDetailsPage() {
             recentIds = recentIds.filter((id) => id !== data.id);
             recentIds.unshift(data.id);
             recentIds = recentIds.slice(0, 3);
-            localStorage.setItem("recentlyViewedIds", JSON.stringify(recentIds));
+            localStorage.setItem(
+              "recentlyViewedIds",
+              JSON.stringify(recentIds),
+            );
           } catch (e) {
             localStorage.setItem("recentlyViewedIds", JSON.stringify([]));
           }
@@ -89,6 +93,15 @@ export default function CarDetailsPage() {
 
   return (
     <PageLayout>
+      <Helmet>
+        <title>{`NDrive | ${car.brand} ${car.model}`}</title>
+        <meta name="description" content={`Check out this ${car.year} ${car.brand} ${car.model} available now on NDrive.`} />
+        <meta property="og:title" content={`NDrive | ${car.brand} ${car.model}`} />
+        <meta property="og:description" content={`Check out this ${car.year} ${car.brand} ${car.model} available now on NDrive.`} />
+        <meta property="og:image" content={car.images[0]} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={car.images[0]} />
+      </Helmet>
       <Container>
         <div className="py-8">
           <Button
