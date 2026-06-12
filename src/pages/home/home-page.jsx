@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import PageLayout from "@/components/layout/page-layout";
 import Container from "@/components/layout/container";
 import HeroSection from "@/pages/home/components/hero-section";
@@ -48,6 +49,15 @@ function HomePage() {
 
   return (
     <PageLayout>
+      <Helmet>
+        <title>NDrive | Buy Used Cars</title>
+        <meta name="description" content="Browse verified used cars on NDrive" />
+        <meta property="og:title" content="NDrive | Buy Used Cars" />
+        <meta property="og:description" content="Browse verified used cars on NDrive" />
+        <meta property="og:image" content={`${window.location.origin}/og-image.png`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={`${window.location.origin}/og-image.png`} />
+      </Helmet>
       <Container>
         <HeroSection />
 

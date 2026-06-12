@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import PageLayout from "@/components/layout/page-layout";
 import CarsGrid from "@/components/car/cars-grid";
 import { useCars } from "@/hooks/use-cars";
@@ -188,6 +189,15 @@ function CarsPage() {
 
   return (
     <PageLayout>
+      <Helmet>
+        <title>NDrive | Browse Used Cars</title>
+        <meta name="description" content="Search and filter through our extensive collection of premium used cars." />
+        <meta property="og:title" content="NDrive | Browse Used Cars" />
+        <meta property="og:description" content="Search and filter through our extensive collection of premium used cars." />
+        <meta property="og:image" content={`${window.location.origin}/og-image.png`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:image" content={`${window.location.origin}/og-image.png`} />
+      </Helmet>
       <Container>
         <div className="mb-8 pb-6 border-b flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0">
           <div>
