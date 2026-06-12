@@ -30,6 +30,16 @@ export default function CarDetailsPage() {
           setError("Car not found");
         } else {
           setCar(data);
+          try {
+            const stored = localStorage.getItem("recentlyViewedIds");
+            let recentIds = stored ? JSON.parse(stored) : [];
+            recentIds = recentIds.filter((id) => id !== data.id);
+            recentIds.unshift(data.id);
+            recentIds = recentIds.slice(0, 3);
+            localStorage.setItem("recentlyViewedIds", JSON.stringify(recentIds));
+          } catch (e) {
+            localStorage.setItem("recentlyViewedIds", JSON.stringify([]));
+          }
         }
       } catch (err) {
         setError(err.message || "Failed to fetch car details");
