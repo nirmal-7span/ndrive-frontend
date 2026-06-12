@@ -1,4 +1,5 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import PageLayout from "@/components/layout/page-layout";
 import CarsGrid from "@/components/car/cars-grid";
 import { useCars } from "@/hooks/use-cars";
@@ -17,24 +18,62 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 function CarsPage() {
   const { carsList, loading, error, uniqueBrandsCount } = useCars();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  const [filters, setFilters] = useState({
-    brands: [],
+  const [filters, setFilters] = useState(() => ({
+    brands: searchParams.getAll("brand"),
     bodyTypes: [],
-    fuelTypes: [],
-    transmissions: [],
+    fuelTypes: searchParams.getAll("fuel"),
+    transmissions: searchParams.getAll("transmission"),
     ownerships: [],
     priceRange: { min: "", max: "" },
     yearRange: { min: "", max: "" },
     kmRange: { min: "", max: "" },
-  });
+  }));
+
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams);
+
+    params.delete("brand");
+    params.delete("fuel");
+    params.delete("transmission");
+
+    filters.brands.forEach((brand) => params.append("brand", brand));
+    filters.fuelTypes.forEach((fuel) => params.append("fuel", fuel));
+    filters.transmissions.forEach((trans) =>
+      params.append("transmission", trans),
+    );
+
+    setSearchParams(params, { replace: true });
+  }, [
+    filters.brands,
+    filters.fuelTypes,
+    filters.transmissions,
+    setSearchParams,
+  ]);
 
   const [sortBy, setSortBy] = useState("Relevance");
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const carsPerPage = 6;
+
+  // Reset to page 1 when filters, search, or sort change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, filters, sortBy]);
 
   const filteredAndSortedCars = useMemo(() => {
     let result = [...carsList];
@@ -119,6 +158,13 @@ function CarsPage() {
 
     return result;
   }, [carsList, searchQuery, sortBy, filters]);
+
+  const totalPages = Math.ceil(filteredAndSortedCars.length / carsPerPage);
+  const startIndex = (currentPage - 1) * carsPerPage;
+  const paginatedCars = filteredAndSortedCars.slice(
+    startIndex,
+    startIndex + carsPerPage,
+  );
 
   if (error) {
     return (
@@ -233,7 +279,55 @@ function CarsPage() {
                 No cars found.
               </div>
             ) : (
-              <CarsGrid cars={filteredAndSortedCars} isLoading={loading} />
+              <>
+                <CarsGrid cars={paginatedCars} isLoading={loading} />
+
+                {totalPages > 1 && !loading && (
+                  <div className="mt-8">
+                    <Pagination>
+                      <PaginationContent>
+                        <PaginationItem>
+                          <PaginationPrevious
+                            onClick={() =>
+                              setCurrentPage((p) => Math.max(1, p - 1))
+                            }
+                            className={
+                              currentPage === 1
+                                ? "pointer-events-none opacity-50"
+                                : "cursor-pointer"
+                            }
+                          />
+                        </PaginationItem>
+
+                        {[...Array(totalPages)].map((_, i) => (
+                          <PaginationItem key={i}>
+                            <PaginationLink
+                              onClick={() => setCurrentPage(i + 1)}
+                              isActive={currentPage === i + 1}
+                              className="cursor-pointer"
+                            >
+                              {i + 1}
+                            </PaginationLink>
+                          </PaginationItem>
+                        ))}
+
+                        <PaginationItem>
+                          <PaginationNext
+                            onClick={() =>
+                              setCurrentPage((p) => Math.min(totalPages, p + 1))
+                            }
+                            className={
+                              currentPage === totalPages
+                                ? "pointer-events-none opacity-50"
+                                : "cursor-pointer"
+                            }
+                          />
+                        </PaginationItem>
+                      </PaginationContent>
+                    </Pagination>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
