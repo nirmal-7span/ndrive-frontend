@@ -2,7 +2,9 @@ import cars from "@/data/cars.json";
 
 export const carsApi = {
     getCars: async () => {
-        return Promise.resolve(cars);
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(cars), 500);
+        });
     },
 
     getCarById: async (id) => {
@@ -10,6 +12,8 @@ export const carsApi = {
             (item) => item.id === Number(id)
         );
 
-        return Promise.resolve(car);
+        return new Promise((resolve) => {
+            setTimeout(() => resolve(car), 500);
+        });
     },
 };

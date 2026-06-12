@@ -14,7 +14,7 @@ function CarCard({ car }) {
   const navigate = useNavigate();
 
   return (
-    <Card className="overflow-hidden pt-0 flex flex-col">
+    <Card className="overflow-hidden pt-0 flex flex-col h-full">
       <div className="relative">
         <img
           src={car.images[0]}
@@ -34,20 +34,28 @@ function CarCard({ car }) {
         <p className="text-sm text-muted-foreground">{car.variant}</p>
       </CardHeader>
 
-      <CardContent className="space-y-4 flex-1">
-        <div className="flex flex-wrap gap-2">
+      <CardContent className="flex-1 flex flex-col">
+        <div className="flex flex-wrap gap-2 mb-4">
           <Badge variant="secondary">{car.fuelType}</Badge>
           <Badge variant="secondary">{car.transmission}</Badge>
           <Badge variant="secondary">{car.year}</Badge>
+          <Badge variant="secondary">{car.ownership}</Badge>
+          <Badge variant="secondary">
+            {car.kmDriven.toLocaleString("en-IN")} km
+          </Badge>
         </div>
 
-        <div>
+        <div className="mt-auto">
           <p className="text-2xl font-bold">{formatPrice(car.price)}</p>
+          <p className="text-sm text-muted-foreground mt-1">
+            EMI from {formatPrice(car.emiPerMonth)}/m
+          </p>
         </div>
       </CardContent>
 
       <CardFooter>
         <Button
+          size="lg"
           className="w-full cursor-pointer"
           onClick={() => navigate(`/cars/${car.id}`)}
         >

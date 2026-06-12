@@ -1,9 +1,11 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
+import { Skeleton } from "@/components/ui/skeleton";
 import formatPrice from "@/utils/format-price";
 
-export default function FiltersSidebar({ cars, filters, setFilters }) {
+export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
   const brands = [...new Set(cars.map((car) => car.brand))].sort();
+  const bodyTypes = [...new Set(cars.map((car) => car.bodyType))].sort();
   const fuelTypes = [...new Set(cars.map((car) => car.fuelType))].sort();
   const transmissions = [
     ...new Set(cars.map((car) => car.transmission)),
@@ -39,10 +41,25 @@ export default function FiltersSidebar({ cars, filters, setFilters }) {
     }));
   };
 
+  if (loading) {
+    return (
+      <div className="space-y-6">
+        {[1, 2, 3, 4, 5, 6].map((item) => (
+          <div key={item} className="space-y-3">
+            <Skeleton className="h-5 w-24" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-3/4" />
+            <Skeleton className="h-4 w-5/6" />
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div>
-        <div className="flex justify-between items-center mb-3">
+        <div className="flex flex-col gap-1 mb-3">
           <h3 className="font-semibold">Price Range</h3>
           <span className="text-xs text-muted-foreground">
             {formatPrice(
@@ -84,6 +101,29 @@ export default function FiltersSidebar({ cars, filters, setFilters }) {
                 className="text-sm cursor-pointer leading-none"
               >
                 {brand}
+              </label>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3 className="font-semibold mb-3">Body Type</h3>
+        <div className="space-y-3">
+          {bodyTypes.map((body) => (
+            <div key={body} className="flex items-center gap-2">
+              <Checkbox
+                id={`body-${body}`}
+                checked={filters.bodyTypes.includes(body)}
+                onCheckedChange={(checked) =>
+                  handleCheckboxChange("bodyTypes", body, checked)
+                }
+              />
+              <label
+                htmlFor={`body-${body}`}
+                className="text-sm cursor-pointer leading-none"
+              >
+                {body}
               </label>
             </div>
           ))}
@@ -159,9 +199,8 @@ export default function FiltersSidebar({ cars, filters, setFilters }) {
         </div>
       </div>
 
-      {/* Year Range */}
       <div>
-        <div className="flex justify-between items-center mb-3">
+        <div className="flex flex-col gap-1 mb-3">
           <h3 className="font-semibold">Year</h3>
           <span className="text-xs text-muted-foreground">
             {filters.yearRange.min !== "" ? filters.yearRange.min : minYear} -{" "}
@@ -181,9 +220,8 @@ export default function FiltersSidebar({ cars, filters, setFilters }) {
         />
       </div>
 
-      {/* KM Range */}
       <div>
-        <div className="flex justify-between items-center mb-3">
+        <div className="flex flex-col gap-1 mb-3">
           <h3 className="font-semibold">KM Driven</h3>
           <span className="text-xs text-muted-foreground">
             {Number(
