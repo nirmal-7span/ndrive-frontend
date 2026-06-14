@@ -80,12 +80,11 @@ function CarsPage() {
     let result = [...carsList];
 
     if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase();
-      result = result.filter(
-        (car) =>
-          car.brand.toLowerCase().includes(query) ||
-          car.model.toLowerCase().includes(query) ||
-          car.variant.toLowerCase().includes(query),
+      const query = searchQuery.toLowerCase().trim();
+      result = result.filter((car) =>
+        `${car.brand} ${car.model} ${car.variant}`
+          .toLowerCase()
+          .includes(query),
       );
     }
 
@@ -191,12 +190,24 @@ function CarsPage() {
     <PageLayout>
       <Helmet>
         <title>NDrive | Browse Used Cars</title>
-        <meta name="description" content="Search and filter through our extensive collection of premium used cars." />
+        <meta
+          name="description"
+          content="Search and filter through our extensive collection of premium used cars."
+        />
         <meta property="og:title" content="NDrive | Browse Used Cars" />
-        <meta property="og:description" content="Search and filter through our extensive collection of premium used cars." />
-        <meta property="og:image" content={`${window.location.origin}/og-image.png`} />
+        <meta
+          property="og:description"
+          content="Search and filter through our extensive collection of premium used cars."
+        />
+        <meta
+          property="og:image"
+          content={`${window.location.origin}/og-image.png`}
+        />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={`${window.location.origin}/og-image.png`} />
+        <meta
+          name="twitter:image"
+          content={`${window.location.origin}/og-image.png`}
+        />
       </Helmet>
       <Container>
         <div className="mb-8 pb-6 border-b flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 sm:gap-0">
