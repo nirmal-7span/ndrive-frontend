@@ -46,19 +46,24 @@ function CarsPage() {
   }));
 
   useEffect(() => {
-    const params = new URLSearchParams(searchParams);
+    setSearchParams(
+      (prevParams) => {
+        const params = new URLSearchParams(prevParams);
 
-    params.delete("brand");
-    params.delete("fuel");
-    params.delete("transmission");
+        params.delete("brand");
+        params.delete("fuel");
+        params.delete("transmission");
 
-    filters.brands.forEach((brand) => params.append("brand", brand));
-    filters.fuelTypes.forEach((fuel) => params.append("fuel", fuel));
-    filters.transmissions.forEach((trans) =>
-      params.append("transmission", trans),
+        filters.brands.forEach((brand) => params.append("brand", brand));
+        filters.fuelTypes.forEach((fuel) => params.append("fuel", fuel));
+        filters.transmissions.forEach((trans) =>
+          params.append("transmission", trans),
+        );
+
+        return params;
+      },
+      { replace: true },
     );
-
-    setSearchParams(params, { replace: true });
   }, [
     filters.brands,
     filters.fuelTypes,
@@ -71,10 +76,20 @@ function CarsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const carsPerPage = 6;
 
-  // Reset to page 1 when filters, search, or sort change
-  useEffect(() => {
+  const [prevFiltersState, setPrevFiltersState] = useState({
+    searchQuery,
+    filters,
+    sortBy,
+  });
+
+  if (
+    searchQuery !== prevFiltersState.searchQuery ||
+    filters !== prevFiltersState.filters ||
+    sortBy !== prevFiltersState.sortBy
+  ) {
+    setPrevFiltersState({ searchQuery, filters, sortBy });
     setCurrentPage(1);
-  }, [searchQuery, filters, sortBy]);
+  }
 
   const filteredAndSortedCars = useMemo(() => {
     let result = [...carsList];

@@ -41,7 +41,7 @@ export default function CarDetailsPage() {
               "recentlyViewedIds",
               JSON.stringify(recentIds),
             );
-          } catch (e) {
+          } catch {
             localStorage.setItem("recentlyViewedIds", JSON.stringify([]));
           }
         }
@@ -95,9 +95,18 @@ export default function CarDetailsPage() {
     <PageLayout>
       <Helmet>
         <title>{`NDrive | ${car.brand} ${car.model}`}</title>
-        <meta name="description" content={`Check out this ${car.year} ${car.brand} ${car.model} available now on NDrive.`} />
-        <meta property="og:title" content={`NDrive | ${car.brand} ${car.model}`} />
-        <meta property="og:description" content={`Check out this ${car.year} ${car.brand} ${car.model} available now on NDrive.`} />
+        <meta
+          name="description"
+          content={`Check out this ${car.year} ${car.brand} ${car.model} available now on NDrive.`}
+        />
+        <meta
+          property="og:title"
+          content={`NDrive | ${car.brand} ${car.model}`}
+        />
+        <meta
+          property="og:description"
+          content={`Check out this ${car.year} ${car.brand} ${car.model} available now on NDrive.`}
+        />
         <meta property="og:image" content={car.images[0]} />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:image" content={car.images[0]} />

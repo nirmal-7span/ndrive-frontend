@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import PageLayout from "@/components/layout/page-layout";
 import Container from "@/components/layout/container";
@@ -10,21 +10,19 @@ import EmptyState from "@/components/shared/empty-state";
 
 function HomePage() {
   const { carsList, loading, error } = useCars();
-  const [recentCars, setRecentCars] = useState([]);
-
-  useEffect(() => {
+  const recentCars = useMemo(() => {
     try {
       const stored = localStorage.getItem("recentlyViewedIds");
       if (stored && carsList.length > 0) {
         const ids = JSON.parse(stored);
-        const carsForRecentlyViewed = ids.map((id) =>
-          carsList.find((c) => c.id === id),
-        );
-        setRecentCars(carsForRecentlyViewed);
+        return ids
+          .map((id) => carsList.find((c) => c.id === id))
+          .filter(Boolean);
       }
-    } catch (e) {
-      setRecentCars([]);
+    } catch {
+      console.log("Error loading recently viewed cars");
     }
+    return [];
   }, [carsList]);
 
   if (error) {
@@ -51,12 +49,24 @@ function HomePage() {
     <PageLayout>
       <Helmet>
         <title>NDrive | Buy Used Cars</title>
-        <meta name="description" content="Browse verified used cars on NDrive" />
+        <meta
+          name="description"
+          content="Browse verified used cars on NDrive"
+        />
         <meta property="og:title" content="NDrive | Buy Used Cars" />
-        <meta property="og:description" content="Browse verified used cars on NDrive" />
-        <meta property="og:image" content={`${window.location.origin}/og-image.png`} />
+        <meta
+          property="og:description"
+          content="Browse verified used cars on NDrive"
+        />
+        <meta
+          property="og:image"
+          content={`${window.location.origin}/og-image.png`}
+        />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:image" content={`${window.location.origin}/og-image.png`} />
+        <meta
+          name="twitter:image"
+          content={`${window.location.origin}/og-image.png`}
+        />
       </Helmet>
       <Container>
         <HeroSection />
