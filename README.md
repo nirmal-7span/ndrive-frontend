@@ -1,69 +1,97 @@
-# NDrive - Used Cars
+# NDrive
 
-Hi there! 👋 Welcome to the frontend repository for **NDrive**, a modern, responsive and user-friendly web application for browsing and buying used cars.
+NDrive is a frontend web application for browsing used cars. Users can search, filter, sort, and view detailed information about cars available in the inventory.
 
-I built this project during my internship to showcase a clean UI, solid React architecture, and a great user experience.
+I built this project during my frontend internship to practice React, routing, state management, reusable components, and responsive UI development.
 
-## ✨ What's Inside
+## Features
 
-- **Dynamic Car Discovery**: A beautiful home page featuring top picks and an automatically updated "Recently Viewed" section.
-- **Advanced Search & Filters**: Users can quickly find the exact car they want. Filters like Brand, Fuel Type, and Transmission sync directly with the URL so users can easily copy and share exact search results with friends!
-- **Smooth Pagination**: Built-in client-side pagination that makes browsing large inventories seamless.
-- **Detailed Car Views**: A dedicated page for every car, featuring an interactive image gallery, full specifications, and a one-click "Share" button.
-- **Smart Local Storage**: The "Recently Viewed" feature runs purely on the frontend. It cleverly stores only lightweight car IDs in `localStorage` to keep the app fast.
-- **SEO Ready**: Configured with `react-helmet-async` for dynamic browser tab titles, and static Open Graph (`og:`) tags so the site looks amazing when links are shared on WhatsApp or Twitter.
+- Browse available used cars
+- Search cars by brand, model, or variant
+- Filter cars by:
+  - Brand
+  - Body Type
+  - Fuel Type
+  - Transmission
+  - Ownership
+  - Price Range
+  - Year
+  - KM Driven
 
-## 🛠️ Tech Stack
+- Sort cars by price, year, and mileage
+- Client-side pagination
+- Car details page with image gallery and specifications
+- Recently viewed cars using localStorage
+- Share car details page using the Clipboard API
+- Responsive design for mobile, tablet, and desktop
+- Dynamic page titles using react-helmet-async
 
-This project was built using modern web development tools:
+## Tech Stack
 
-- **React** - The core UI library.
-- **Vite** - For local development and optimized production builds.
-- **Tailwind CSS** - For rapid, custom, and highly responsive styling.
-- **Shadcn UI** - For beautiful, accessible, and highly customizable UI components.
-- **React Router DOM** - For seamless single-page application navigation.
+- React
+- Vite
+- React Router DOM
+- Tailwind CSS
+- Shadcn UI
+- JavaScript (ES6+)
 
-## 🚀 Getting Started
-
-If you want to run this project locally on your machine, it's super easy!
+## Getting Started
 
 ### Prerequisites
 
-Make sure you have [Node.js](https://nodejs.org/) installed.
+Make sure Node.js is installed on your machine.
 
 ### Installation
 
-1. **Clone the repository** (or download the zip):
+Clone the repository:
 
-   ```bash
-   git clone <repo-url>
-   cd ndrive-frontend
-   ```
+```bash
+git clone https://github.com/nirmal-7span/ndrive-frontend
+cd ndrive-frontend
+```
 
-2. **Install the dependencies**:
+Install dependencies:
 
-   ```bash
-   npm install
-   ```
+```bash
+npm install
+```
 
-3. **Start the development server**:
-   ```bash
-   npm run dev
-   ```
-4. **Open it in your browser**:
-   Vite will give you a local URL (usually `http://localhost:5173`). Open that in your browser to see the app running!
+Start the development server:
 
-## 📂 Project Structure
+```bash
+npm run dev
+```
 
-Here is a quick overview of how the code is organized:
+Open the application in your browser:
 
-- `/src/components` - Reusable UI elements (Navbar, Footer, Car Cards, Layout containers).
-- `/src/pages` - The main views of the application (Home, Cars List, Car Details).
-- `/src/data` - Contains `cars.json`, our mock database that powers the application.
-- `/src/api` - The simulated API logic that fetches our car data.
-- `/public` - Static assets like the main `og-image.png`.
-- `index.html` - The main HTML entry point containing our global SEO/Open Graph tags.
+```txt
+http://localhost:5173
+```
 
----
+## Project Structure
 
-_Built during my frontend internship._
+```txt
+src/
+├── api/          # API simulation and data fetching
+├── assets/       # Images and static assets
+├── components/   # Reusable UI components
+├── data/         # Cars data
+├── hooks/        # Custom React hooks
+├── pages/        # Application pages
+├── utils/        # Utility functions
+```
+
+## Concepts Used
+
+- React Hooks (useState, useEffect, useMemo)
+- Custom Hooks
+- Component Reusability
+- Client-side Routing
+- URL Search Parameters
+- Local Storage
+- Responsive Design
+- Basic SEO
+
+## About
+
+This project was built as part of my frontend internship to build a simple & responsive single-page application.
