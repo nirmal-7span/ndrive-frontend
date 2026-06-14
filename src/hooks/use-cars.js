@@ -13,7 +13,7 @@ export function useCars() {
         const cars = await carsApi.getCars();
         setCarsList(cars);
         setUniqueBrandsCount(new Set(cars.map((car) => car.brand)).size);
-      } catch (err) {
+      } catch {
         setError("Failed to load cars");
       } finally {
         setLoading(false);
