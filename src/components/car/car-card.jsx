@@ -22,7 +22,7 @@ function CarCard({ car }) {
           className="w-full h-52 object-cover"
         />
 
-        <Badge variant="outline" className="absolute top-3 right-3">
+        <Badge variant="secondary" className="absolute top-3 right-3">
           {car.badge}
         </Badge>
       </div>
@@ -46,7 +46,14 @@ function CarCard({ car }) {
         </div>
 
         <div className="mt-auto">
-          <p className="text-2xl font-bold">{formatPrice(car.price)}</p>
+          <div className="flex items-center gap-2">
+            <p className="text-2xl font-bold">{formatPrice(car.price)}</p>
+            {car.originalPrice && car.originalPrice > car.price && (
+              <p className="text-sm text-muted-foreground line-through">
+                {formatPrice(car.originalPrice)}
+              </p>
+            )}
+          </div>
           <p className="text-sm text-muted-foreground mt-1">
             EMI from {formatPrice(car.emiPerMonth)}/m
           </p>
