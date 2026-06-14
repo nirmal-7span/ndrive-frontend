@@ -40,8 +40,8 @@ export default function CarGallery({ images }) {
               <img
                 loading="lazy"
                 src={image}
-                alt={`Thumbnail ${index + 1}`}
-                className="absolute inset-0 w-full h-full object-cover"
+                alt={`Car Thumbnail ${index + 1}`}
+                className="w-full h-full object-cover"
               />
             </button>
           ))}

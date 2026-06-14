@@ -1,10 +1,11 @@
 import logo from "@/assets/logos/NDrive Logo.png";
+import { Link } from "react-router-dom";
 
 function Logo() {
   return (
-    <a href="/">
+    <Link to="/">
       <img src={logo} alt="NDrive logo" className="h-12 w-auto" />
-    </a>
+    </Link>
   );
 }
 
