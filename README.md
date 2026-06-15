@@ -4,6 +4,14 @@ NDrive is a frontend web application for browsing used cars. Users can search, f
 
 I built this project during my frontend internship to practice React, routing, state management, reusable components, and responsive UI development.
 
+## Important Links
+
+- **[GitHub Repository](https://github.com/nirmal-7span/ndrive-frontend)**
+- **[Live Deployment](https://ndrive.nirmalpatel.tech/)**
+- **[Documentation](https://github.com/nirmal-7span/ndrive-frontend/blob/main/README.md)**
+- **[Architecture Explanation](https://github.com/nirmal-7span/ndrive-frontend/blob/main/Architecture.png)**
+- **[Screen Recording](https://drive.google.com/drive/folders/1NFCDCNXpiV2-FQhGWoFs5uxOFkN4S_1H?usp=sharing)**
+
 ## Features
 
 - Browse available used cars
