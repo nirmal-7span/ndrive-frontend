@@ -6,7 +6,6 @@ I built this project during my frontend internship to practice React, routing, s
 
 ## Important Links
 
-- **[GitHub Repository](https://github.com/nirmal-7span/ndrive-frontend)**
 - **[Live Deployment](https://ndrive.nirmalpatel.tech/)**
 - **[Documentation](https://github.com/nirmal-7span/ndrive-frontend/blob/main/README.md)**
 - **[Architecture Explanation](https://github.com/nirmal-7span/ndrive-frontend/blob/main/Architecture.png)**
