@@ -15,8 +15,6 @@ import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
-  SheetHeader,
-  SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
 import {
@@ -290,10 +288,7 @@ function CarsPage() {
                     side="left"
                     className="w-[85vw] sm:w-80 overflow-y-auto scrollbar-thin"
                   >
-                    <SheetHeader className="text-left">
-                      <SheetTitle>Filters</SheetTitle>
-                    </SheetHeader>
-                    <div className="px-6 pb-6">
+                    <div className="px-6 pb-6 pt-12">
                       <FiltersSidebar
                         cars={carsList}
                         filters={filters}

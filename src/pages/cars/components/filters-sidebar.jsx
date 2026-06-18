@@ -2,6 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import { Skeleton } from "@/components/ui/skeleton";
 import formatPrice from "@/utils/format-price";
+import { Button } from "@/components/ui/button";
 
 export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
   const brands = [...new Set(cars.map((car) => car.brand))].sort();
@@ -41,6 +42,19 @@ export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
     }));
   };
 
+  const handleReset = () => {
+    setFilters({
+      brands: [],
+      bodyTypes: [],
+      fuelTypes: [],
+      transmissions: [],
+      ownerships: [],
+      priceRange: { min: "", max: "" },
+      yearRange: { min: "", max: "" },
+      kmRange: { min: "", max: "" },
+    });
+  };
+
   if (loading) {
     return (
       <div className="space-y-6">
@@ -58,6 +72,17 @@ export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
 
   return (
     <div className="space-y-6">
+      <div className="flex items-center justify-between pb-2 border-b">
+        <h2 className="text-lg font-semibold tracking-tight">Filters</h2>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={handleReset}
+          className="h-8 px-2 text-muted-foreground hover:text-foreground"
+        >
+          Reset
+        </Button>
+      </div>
       <div>
         <div className="flex flex-col gap-1 mb-3">
           <h3 className="font-semibold">Price Range</h3>
@@ -83,7 +108,6 @@ export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
           className="my-4"
         />
       </div>
-
       <div>
         <h3 className="font-semibold mb-3">Brand</h3>
         <div className="space-y-3 max-h-48 overflow-y-auto pr-2 scrollbar-thin">
@@ -106,7 +130,6 @@ export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
           ))}
         </div>
       </div>
-
       <div>
         <h3 className="font-semibold mb-3">Body Type</h3>
         <div className="space-y-3">
@@ -129,7 +152,6 @@ export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
           ))}
         </div>
       </div>
-
       <div>
         <h3 className="font-semibold mb-3">Fuel Type</h3>
         <div className="space-y-3">
@@ -152,7 +174,6 @@ export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
           ))}
         </div>
       </div>
-
       <div>
         <h3 className="font-semibold mb-3">Transmission</h3>
         <div className="space-y-3">
@@ -175,7 +196,6 @@ export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
           ))}
         </div>
       </div>
-
       <div>
         <h3 className="font-semibold mb-3">Ownership</h3>
         <div className="space-y-3">
@@ -198,7 +218,6 @@ export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
           ))}
         </div>
       </div>
-
       <div>
         <div className="flex flex-col gap-1 mb-3">
           <h3 className="font-semibold">Year</h3>
@@ -219,7 +238,6 @@ export default function FiltersSidebar({ cars, filters, setFilters, loading }) {
           className="my-4"
         />
       </div>
-
       <div>
         <div className="flex flex-col gap-1 mb-3">
           <h3 className="font-semibold">KM Driven</h3>
